@@ -41,7 +41,7 @@ function renderNotes(notes) {
     // mapping notes to html tags
     var strHtmls = notes.map(function(note, i){
         var strHtml =  '<div class="note" onclick="noteClicked(this)" data-note="'+i+'"' + 
-                             'style="background:'+ note.color +'">' + 
+                             'style="background:'+ note.color +'" data-sound="sound/lose.mp3">' + 
                             note.sound + 
                         '</div>';
         return strHtml;
@@ -51,7 +51,13 @@ function renderNotes(notes) {
     var elPiano = document.querySelector('.piano');
     elPiano.innerHTML = strHtmls.join('');
 }
-
+function playSoundNote(elNote) {
+    
+    var sound = elNote.getAttribute('data-sound');
+    var audioNote = new Audio(sound);
+    audioNote.play();
+   
+}
 function addRandomNote() {
     gState.seqNoteIndexes.push(getRandomIntInclusive(0,NOTES.length-1));
 }
