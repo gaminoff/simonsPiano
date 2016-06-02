@@ -41,8 +41,8 @@ function renderNotes(notes) {
     // mapping notes to html tags
     var strHtmls = notes.map(function(note, i){
         var strHtml =  '<div class="note" onclick="noteClicked(this)" data-note="'+i+'"' + 
-                             'style="background:'+ note.color +'" data-sound="sound/lose.mp3">' + 
-                            note.sound + 
+                             'style="background:'+ note.color +'" data-sound="sound/'+(i+1)+'.mp3">' + 
+                        
                         '</div>';
         return strHtml;
     });
@@ -70,8 +70,9 @@ function playSeq() {
         
         setTimeout(function playNote() {
             elNotes[seqNoteIndex].classList.add('playing');
-            
+            playSoundNote(elNotes[seqNoteIndex]);           
             setTimeout(function donePlayingNote() {
+           
                 elNotes[seqNoteIndex].classList.remove('playing');
             }, 500);
             
@@ -90,6 +91,7 @@ function playSeq() {
 function noteClicked(elNote) {
     
     if (!gState.isUserTurn) return;
+    playSoundNote(elNote);
     var noteIndex = +elNote.getAttribute('data-note');
     console.log('noteIndex is: ', noteIndex);
     
