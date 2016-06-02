@@ -41,7 +41,7 @@ function renderNotes(notes) {
     // mapping notes to html tags
     var strHtmls = notes.map(function(note, i){
         var strHtml =  '<div class="note" onclick="noteClicked(this)" data-note="'+i+'"' + 
-                             'style="background:'+ note.color +'" data-sound="sound/'+(i+1)+'.mp3">' + 
+                             'style="background:'+ note.color +'" data-sound="sound/'+(i+1)+'.wav">' + 
                         
                         '</div>';
         return strHtml;
@@ -120,12 +120,16 @@ function noteClicked(elNote) {
 }
 
 function computerTurn() {
+    
+    setTimeout( function() {
+        
      gState.isUserTurn = false;
      gState.currNoteIndexToClick  = 0;
      //alert('User Turn is Over');
      
      addRandomNote();
      playSeq();
+    }, 1500);
 }
 
 
