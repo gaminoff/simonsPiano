@@ -22,7 +22,7 @@ var gState = {
 }
 
 function init() {
-    NOTES = createNotesModel(3);
+    NOTES = createNotesModel(5);
     renderNotes(NOTES); 
     computerTurn();
 }
@@ -31,9 +31,10 @@ function createNotesModel(size){
     var notes = [];
     
     for (var i = 0; i < size; i++) {
-       var note = {sound : 'Note' + (i+1), color: getRandomColor()};
+       var note = {sound : ''+(i+1)+'.wav', color: getRandomColor()};
        notes.push(note);
     }
+    
     return notes;
 }
 
@@ -76,7 +77,7 @@ function playSeq() {
                 elNotes[seqNoteIndex].classList.remove('playing');
             }, 500);
             
-            console.log('Playing: ', NOTES[seqNoteIndex].sound);
+            //console.log('Playing: ', NOTES[seqNoteIndex].sound);
         }, 1000 * i);
         
     });
@@ -92,8 +93,16 @@ function noteClicked(elNote) {
     
     if (!gState.isUserTurn) return;
     playSoundNote(elNote);
+    
+    elNote.classList.add('playing');        
+    setTimeout(function donePlayingNote() {
+        
+            elNote.classList.remove('playing');
+        }, 500);
+ 
+    
     var noteIndex = +elNote.getAttribute('data-note');
-    console.log('noteIndex is: ', noteIndex);
+   // console.log('noteIndex is: ', noteIndex);
     
     
     // User clicked the right note
