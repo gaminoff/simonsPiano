@@ -10,14 +10,14 @@ body {
 .pianoCont {
   display: flex ;
   flex-direction: column ;
-  width: 40% ;
+  min-width: 350px ;
 }
 
 .piano {
   background: #222;
   display:flex;
-  width: 100% ;
   padding: 10px 20px 25px ;
+  width: 100% ;
   border-radius: 10px ;
   justify-content: center;
   position: relative;
@@ -26,15 +26,16 @@ body {
 
 .note {
   background: #fff ;
-  width:20%;
+  width: 20%;
   height:250px;
   text-align: center;
   margin:1px;
   border-radius: 4%;
   box-shadow:0px 0px 2px rgba(4, 4, 4, 1) inset ;
-  transition: ease 0.08s ;
+  transition: ease-in-out 0.08s ;
   opacity: 0.95;
   position: relative;
+  cursor: pointer ;
 }
 
 .playing {
@@ -44,8 +45,32 @@ body {
   opacity: 1;
 } 
 
-.score {
-  align-self: flex-start ;
+.panel {
+  position: relative ;
+  display: flex ;
+  /*height: 100px ;*/
+  justify-content: space-between ;
+  align-items: center ;
+  
+}
+
+#sound {
+  width: 100px;
+  height: 30px;
+  background: #252525 ;
+  border: none ;
+  border-radius: 5px ;
+  color: white ;
+  font-size: 1em ;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.3); 
+  transition: ease-in-out 0.2s ;
+}
+
+#sound:hover {
+  cursor: pointer ;
+  /*bottom: 5px ;*/
+  box-shadow: 0px 18px 8px -5px rgba(0, 0, 0, 0.15);
+  transform: translate(0px, -7px);
 }
 
 .b{
