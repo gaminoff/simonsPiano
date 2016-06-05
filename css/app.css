@@ -1,21 +1,23 @@
 .piano {
-  background: lightgrey;
+  background: black;
   display:flex;
   justify-content: center;
 }
 
 
 .note {
-  border: 1px solid black;
+  /*border: 1px solid black;*/
+  background: #fff ;
   width:10%;
   height:200px;
   text-align: center;
   margin:3px;
-  border-radius: 50%;
-
+  /*border-radius: 50%;*/
+  opacity: 0.95;
 }
 
 .playing {
-
+  
   box-shadow:-2px 0 30px rgba(0, 0, 0, .9) inset;
+  opacity: 1;
 } 
