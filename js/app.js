@@ -12,7 +12,7 @@
 'use strict';
 var NOTES;
 
-
+var mute = false;
 // This is my State:
 var gState = {
     isUserTurn : false,
@@ -27,7 +27,7 @@ function init() {
     
  
     computerTurn();
-    document.querySelector('#score').innerHTML = state.score;
+    document.querySelector('#score').innerHTML = gState.score;
     upddateScore(gState);
 }
 
@@ -46,10 +46,9 @@ function renderNotes(notes) {
     // mapping notes to html tags
     var strHtmls = notes.map(function(note, i){
         var strHtml =  '<div class="note" onclick="noteClicked(this)" data-note="'+i+'"' + 
-                             'style="background:'+ note.color +'" data-sound="sound/'+(i+1)+'.wav">' ; 
-                        
+                             'style="background:'+ note.color +'" data-sound="sound/'+(i+1)+'.wav"></div>';
                     if(i % 2 === 1 )         strHtml += '<div class="b" ></div>';
-                     strHtml +=   '</div>';
+                     
         return strHtml;
     });
     
@@ -64,7 +63,7 @@ function playSoundNote(elNote) {
     
     var sound = elNote.getAttribute('data-sound');
     var audioNote = new Audio(sound);
-    audioNote.play();
+    if(!mute) audioNote.play();
    
 }
 function addRandomNote() {
@@ -168,4 +167,17 @@ function upddateScore(state) {
     state.score ++;
     document.querySelector('#score').innerHTML = state.score;
     
+}
+function turnSound(elSound) {
+    
+    if(elSound.getAttribute('data') === 'mute'){
+        mute = true;
+        elSound.setAttribute("data" , "song");
+        elSound.innerHTML = 'song';
+    }
+    else    if(elSound.getAttribute('data') === 'song'){
+                mute = false;
+                elSound.setAttribute("data" , "mute");
+                elSound.innerHTML = 'mute';
+    }    
 }
