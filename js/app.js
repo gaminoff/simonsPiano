@@ -46,9 +46,10 @@ function renderNotes(notes) {
     // mapping notes to html tags
     var strHtmls = notes.map(function(note, i){
         var strHtml =  '<div class="note" onclick="noteClicked(this)" data-note="'+i+'"' + 
-                             'style="background:'+ note.color +'" data-sound="sound/'+(i+1)+'.wav">' + 
+                             'style="background:'+ note.color +'" data-sound="sound/'+(i+1)+'.wav">' ; 
                         
-                        '</div>';
+                    if(i % 2 === 1 )         strHtml += '<div class="b" ></div>';
+                     strHtml +=   '</div>';
         return strHtml;
     });
     
