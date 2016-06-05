@@ -1,30 +1,32 @@
 // Tasks:
 // playNote as reusable function
-// -. when note is played play sounds
-// -. sound when loosing
-// -. sound when correct seq
+
 // Score
 // BONUS:
 // support mute 
 // visual
 // keep max score in localStorage
-// levels
+
  
 
 'use strict';
 var NOTES;
 
+
 // This is my State:
 var gState = {
     isUserTurn : false,
     seqNoteIndexes: [],
-    currNoteIndexToClick: 0
+    currNoteIndexToClick: 0,
+    score : 0
 }
 
 function init() {
     NOTES = createNotesModel(5);
     renderNotes(NOTES); 
     computerTurn();
+    document.querySelector('#score').innerHTML = state.score;
+    upddateScore(gState);
 }
 
 function createNotesModel(size){
@@ -112,17 +114,15 @@ function noteClicked(elNote) {
         
         if (gState.currNoteIndexToClick === gState.seqNoteIndexes.length) {
             computerTurn();
+            upddateScore(gState);
         }
         
         
     } else {
         console.log('User Wrong!');
-        var elPiano = document.querySelector('.piano');
-        elPiano.style.display = 'none';
-        
+        gameover(gState);
     }
     
-    // console.log('elNote', elNote);
     console.log('Note', NOTES[noteIndex]);
    
     
@@ -141,4 +141,25 @@ function computerTurn() {
     }, 1500);
 }
 
+function gameover(state) {
+    
+    var loseAudio =  new Audio('sound/lose.mp3');
+    loseAudio.play();
+    state.isUserTurn = false;
+    state.seqNoteIndexes = [];
+    state.currNoteIndexToClick = 0;
+    state.score = 0;
+    document.querySelector('#score').style.visibility =  'hidden';
+    setTimeout(function() {
+        computerTurn();
+        
+    }, 2000);
+}
 
+function upddateScore(state) {
+    
+    document.querySelector('#score').style.visibility =  'visible';
+    state.score ++;
+    document.querySelector('#score').innerHTML = state.score;
+    
+}
