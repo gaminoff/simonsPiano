@@ -1,6 +1,16 @@
+body {
+  display: flex ;
+  flex-direction: column ;
+  align-items: center ;
+}
+
+
 .piano {
   background: black;
   display:flex;
+  width: 40% ;
+  padding: 10px 20px 25px ;
+  border-radius: 10px ;
   justify-content: center;
 }
 
@@ -8,16 +18,23 @@
 .note {
   /*border: 1px solid black;*/
   background: #fff ;
-  width:10%;
-  height:200px;
+  width:20%;
+  height:250px;
   text-align: center;
-  margin:3px;
-  /*border-radius: 50%;*/
-  opacity: 0.95;
+  margin:1px;
+  border-radius: 4%;
+  /*opacity: 0.95;*/
+  box-shadow:0px 0px 2px rgba(4, 4, 4, 1) inset ;
+  transition: ease 0.08s ;
 }
 
 .playing {
-  
-  box-shadow:-2px 0 30px rgba(0, 0, 0, .9) inset;
+  height: 244px ;
+  box-shadow:0px -3px 8px rgba(0, 0, 0, 1) inset ;
+  background: #fff ;
   opacity: 1;
 } 
+
+.score {
+  align-self: flex-start ;
+}
