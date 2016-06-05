@@ -24,11 +24,9 @@ var gState = {
 function init() {
     NOTES = createNotesModel(5);
     renderNotes(NOTES); 
-    
- 
     computerTurn();
-    document.querySelector('#score').innerHTML = state.score;
-    upddateScore(gState);
+    document.querySelector('#score').innerHTML = gState.score;
+   
 }
 
 function createNotesModel(size){
@@ -46,13 +44,11 @@ function renderNotes(notes) {
     // mapping notes to html tags
     var strHtmls = notes.map(function(note, i){
         var strHtml =  '<div class="note" onclick="noteClicked(this)" data-note="'+i+'"' + 
-                             'style="background:'+ note.color +'" data-sound="sound/'+(i+1)+'.wav">' + 
-                        
-                        '</div>';
+                             'style="background:'+ note.color +'" data-sound="sound/'+(i+1)+'.wav"></div>' ;          
+                    if(i % 2 === 1 )         strHtml += '<div class="b" onclick="return false" ></div>';
+
         return strHtml;
     });
-    
-    
     var elPiano = document.querySelector('.piano');
     elPiano.innerHTML = strHtmls.join('');
 }
@@ -64,8 +60,8 @@ function playSoundNote(elNote) {
     var sound = elNote.getAttribute('data-sound');
     var audioNote = new Audio(sound);
     audioNote.play();
-   
 }
+
 function addRandomNote() {
     gState.seqNoteIndexes.push(getRandomIntInclusive(0,NOTES.length-1));
 }
@@ -92,7 +88,7 @@ function playSeq() {
     setTimeout(function () {
         console.log('Done Playing Sequence!!');
         gState.isUserTurn = true;
-    }, 1000 * gState.seqNoteIndexes.length);
+    }, 300 * gState.seqNoteIndexes.length);
    
 }
 
@@ -118,7 +114,6 @@ function noteClicked(elNote) {
         gState.currNoteIndexToClick++;
         
         if (gState.currNoteIndexToClick === gState.seqNoteIndexes.length) {
-     
             computerTurn();
             upddateScore(gState);
         }
@@ -126,11 +121,8 @@ function noteClicked(elNote) {
     } else {
         console.log('User Wrong!');
         gameover(gState);
-    }
-    
-    console.log('Note', NOTES[noteIndex]);
-   
-    
+    } 
+    console.log('Note', NOTES[noteIndex]);   
 }
 
 function computerTurn() {
@@ -143,7 +135,7 @@ function computerTurn() {
      
      addRandomNote();
      playSeq();
-    }, 1500);
+    }, 1200);
 }
 
 function gameover(state) {
@@ -156,8 +148,7 @@ function gameover(state) {
     state.score = 0;
     document.querySelector('#score').style.visibility =  'hidden';
     setTimeout(function() {
-        computerTurn();
-        
+        computerTurn();   
     }, 2000);
 }
 
