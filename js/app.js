@@ -18,12 +18,15 @@ var NOTES;
 var gState = {
     isUserTurn : false,
     seqNoteIndexes: [],
-    currNoteIndexToClick: 0
+    currNoteIndexToClick: 0,
+   
 }
 
 function init() {
     NOTES = createNotesModel(5);
     renderNotes(NOTES); 
+    
+ 
     computerTurn();
 }
 
@@ -52,6 +55,9 @@ function renderNotes(notes) {
     var elPiano = document.querySelector('.piano');
     elPiano.innerHTML = strHtmls.join('');
 }
+
+
+
 function playSoundNote(elNote) {
     
     var sound = elNote.getAttribute('data-sound');
@@ -75,10 +81,10 @@ function playSeq() {
             setTimeout(function donePlayingNote() {
            
                 elNotes[seqNoteIndex].classList.remove('playing');
-            }, 500);
+            }, 400);
             
             //console.log('Playing: ', NOTES[seqNoteIndex].sound);
-        }, 1000 * i);
+        }, 800 * i);
         
     });
     
@@ -111,9 +117,9 @@ function noteClicked(elNote) {
         gState.currNoteIndexToClick++;
         
         if (gState.currNoteIndexToClick === gState.seqNoteIndexes.length) {
+     
             computerTurn();
         }
-        
         
     } else {
         console.log('User Wrong!');
